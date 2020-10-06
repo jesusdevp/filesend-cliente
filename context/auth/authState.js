@@ -6,6 +6,7 @@ import {
   REGISTRO_EXITOSO,
   REGISTRO_ERROR,
   LIMPIAR_ALERTA,
+  LOGIN_ERROR,
 } from "../../types";
 import clienteAxios from "../../config/axios";
 
@@ -43,6 +44,25 @@ const AuthState = ({ children }) => {
     }, 3000);
   };
 
+  // Autenticar Usuarios
+  const iniciarSesion = async (datos) => {
+    try {
+      const respuesta = await clienteAxios.post("/api/auth", datos);
+      console.log(respuesta);
+    } catch (error) {
+      dispatch({
+        type: LOGIN_ERROR,
+        payload: error.response.data.msg,
+      });
+    }
+    // Limpia la alerta despues de 3 segundos
+    setTimeout(() => {
+      dispatch({
+        type: LIMPIAR_ALERTA,
+      });
+    }, 3000);
+  };
+
   // Usuario auntenticado
   const usuarioAutenticado = (nombre) => {
     dispatch({
@@ -60,6 +80,7 @@ const AuthState = ({ children }) => {
         mensaje: state.mensaje,
         usuarioAutenticado,
         registrarUsuario,
+        iniciarSesion,
       }}
     >
       {children}
