@@ -13,7 +13,9 @@ const Header = () => {
   return (
     <header className="py-8 flex flex-col md:flex-row items-center justify-between">
       <Link href="/">
-        <img className="w-64 mb-8 md:mb-0" src="logo.svg" />
+        <h1 className="w-64 mb-8 md:mb-0 text-5xl text-center border-solid border-4 border-blue-400  font-bold rounded-lg cursor-pointer">
+          File<span className="text-blue-500">Send</span>
+        </h1>
       </Link>
       <div>
         {usuario ? (
@@ -30,7 +32,7 @@ const Header = () => {
         ) : (
           <>
             <Link href="/login">
-              <a className="bg-red-600 px-5 py-3 rounded-lg text-white font-bold uppercase mr-3">
+              <a className="bg-blue-600 px-5 py-3 rounded-lg text-white font-bold uppercase mr-3">
                 Iniciar Sesión
               </a>
             </Link>
