@@ -10,6 +10,7 @@ import {
   LOGIN_ERROR,
 } from "../../types";
 import clienteAxios from "../../config/axios";
+import tokenAuth from "../../config/tokenAuth";
 
 const AuthState = ({ children }) => {
   // State Inicial
@@ -69,7 +70,19 @@ const AuthState = ({ children }) => {
 
   // Retorne el Usuario autenticado en base al JWT
   const usuarioAutenticado = async () => {
-    console.log("Revisando...");
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      tokenAuth(token);
+    }
+
+    try {
+      const respuesta = await clienteAxios.get("/api/auth");
+      dispatch({
+        type: USUARIO_AUTENTICADO,
+        payload: respuesta.data.usuario,
+      });
+    } catch (error) {}
   };
 
   return (
