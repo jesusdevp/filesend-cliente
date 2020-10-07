@@ -67,12 +67,9 @@ const AuthState = ({ children }) => {
     }, 3000);
   };
 
-  // Usuario auntenticado
-  const usuarioAutenticado = (nombre) => {
-    dispatch({
-      type: USUARIO_AUTENTICADO,
-      payload: nombre,
-    });
+  // Retorne el Usuario autenticado en base al JWT
+  const usuarioAutenticado = async () => {
+    console.log("Revisando...");
   };
 
   return (
