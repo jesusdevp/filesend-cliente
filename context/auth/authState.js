@@ -8,6 +8,7 @@ import {
   LIMPIAR_ALERTA,
   LOGIN_EXITOSO,
   LOGIN_ERROR,
+  CERRAR_SESION,
 } from "../../types";
 import clienteAxios from "../../config/axios";
 import tokenAuth from "../../config/tokenAuth";
@@ -82,7 +83,19 @@ const AuthState = ({ children }) => {
         type: USUARIO_AUTENTICADO,
         payload: respuesta.data.usuario,
       });
-    } catch (error) {}
+    } catch (error) {
+      dispatch({
+        type: LOGIN_ERROR,
+        payload: error.response.data.msg,
+      });
+    }
+  };
+
+  // Cerrar la sesión
+  const cerrarSesion = () => {
+    dispatch({
+      type: CERRAR_SESION,
+    });
   };
 
   return (
@@ -95,6 +108,7 @@ const AuthState = ({ children }) => {
         usuarioAutenticado,
         registrarUsuario,
         iniciarSesion,
+        cerrarSesion,
       }}
     >
       {children}
