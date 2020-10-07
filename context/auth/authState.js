@@ -6,6 +6,7 @@ import {
   REGISTRO_EXITOSO,
   REGISTRO_ERROR,
   LIMPIAR_ALERTA,
+  LOGIN_EXITOSO,
   LOGIN_ERROR,
 } from "../../types";
 import clienteAxios from "../../config/axios";
@@ -13,7 +14,7 @@ import clienteAxios from "../../config/axios";
 const AuthState = ({ children }) => {
   // State Inicial
   const initialState = {
-    token: "",
+    token: typeof window !== "undefined" ? localStorage.getItem("token") : "",
     autenticado: null,
     usuario: null,
     mensaje: null,
@@ -48,7 +49,10 @@ const AuthState = ({ children }) => {
   const iniciarSesion = async (datos) => {
     try {
       const respuesta = await clienteAxios.post("/api/auth", datos);
-      console.log(respuesta);
+      dispatch({
+        type: LOGIN_EXITOSO,
+        payload: respuesta.data.token,
+      });
     } catch (error) {
       dispatch({
         type: LOGIN_ERROR,
