@@ -12,7 +12,7 @@ import {
 
 const AppState = ({ children }) => {
   const initialState = {
-    mensaje_archivo: "",
+    mensaje_archivo: null,
   };
 
   // Crear dispatch y state
@@ -24,6 +24,12 @@ const AppState = ({ children }) => {
       type: MOSTRAR_ALERTA,
       payload: msg,
     });
+
+    setTimeout(() => {
+      dispatch({
+        type: LIMPIAR_ALERTA,
+      });
+    }, 3000);
   };
 
   return (

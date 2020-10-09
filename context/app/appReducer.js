@@ -13,6 +13,11 @@ export default (state, action) => {
         ...state,
         mensaje_archivo: action.payload,
       };
+    case LIMPIAR_ALERTA:
+      return {
+        ...state,
+        mensaje_archivo: null,
+      };
     default:
       return state;
   }
