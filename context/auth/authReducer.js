@@ -6,6 +6,8 @@ import {
   LOGIN_ERROR,
   USUARIO_AUTENTICADO,
   CERRAR_SESION,
+  AGREGAR_PASSWORD,
+  AGREGAR_DESCARGAS,
 } from "../../types";
 
 export default (state, action) => {
@@ -42,6 +44,16 @@ export default (state, action) => {
         usuario: null,
         token: null,
         autenticado: null,
+      };
+    case AGREGAR_PASSWORD:
+      return {
+        ...state,
+        password: action.payload,
+      };
+    case AGREGAR_DESCARGAS:
+      return {
+        ...state,
+        descargas: action.payload,
       };
     default:
       return state;
