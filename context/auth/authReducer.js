@@ -6,11 +6,9 @@ import {
   LOGIN_ERROR,
   USUARIO_AUTENTICADO,
   CERRAR_SESION,
-  AGREGAR_PASSWORD,
-  AGREGAR_DESCARGAS,
 } from "../../types";
 
-export default (state, action) => {
+const authReducer = (state, action) => {
   switch (action.type) {
     case REGISTRO_EXITOSO:
     case REGISTRO_ERROR:
@@ -45,17 +43,10 @@ export default (state, action) => {
         token: null,
         autenticado: null,
       };
-    case AGREGAR_PASSWORD:
-      return {
-        ...state,
-        password: action.payload,
-      };
-    case AGREGAR_DESCARGAS:
-      return {
-        ...state,
-        descargas: action.payload,
-      };
+
     default:
       return state;
   }
 };
+
+export default authReducer;

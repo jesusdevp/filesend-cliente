@@ -73,7 +73,7 @@ const AppState = ({ children }) => {
       nombre: state.nombre,
       nombre_original: state.nombre_original,
       descargas: state.descargas,
-      password: state.passowrd,
+      password: state.password,
       autor: state.autor,
     };
     try {
