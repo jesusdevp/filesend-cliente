@@ -1,6 +1,8 @@
 import Layout from "../../components/Layout";
 import clienteAxios from "../../config/axios";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import appContext from "../../context/app/appContext";
+import Alerta from "../../components/Alerta";
 
 export async function getServerSideProps({ params }) {
   const { enlace } = params;
@@ -25,12 +27,33 @@ export async function getServerSidePaths() {
 }
 
 const Enlace = ({ enlace }) => {
+  // context de la app
+  const AppContext = useContext(appContext);
+  const { mostrarAlerta, mensaje_archivo } = AppContext;
+
   const [tienePassword, setTienePassword] = useState(enlace.password);
   const [password, setPassword] = useState("");
 
-  const verificarPassword = (e) => {
+  const [fileLink, setFileLink] = useState(enlace.archivo);
+
+  const verificarPassword = async (e) => {
     e.preventDefault();
-    console.log("Verificando...");
+
+    const data = {
+      password,
+    };
+
+    try {
+      const resultado = await clienteAxios.post(
+        `api/enlaces/${enlace.enlace}`,
+        data
+      );
+
+      setTienePassword(resultado.data.password);
+      setFileLink(resultado.data.archivo);
+    } catch (error) {
+      mostrarAlerta(error.response.data.msg);
+    }
   };
   return (
     <Layout>
@@ -39,6 +62,7 @@ const Enlace = ({ enlace }) => {
           <p className="text-center">
             Este enlace esta protegido por un password, coloca a continuación{" "}
           </p>
+          {mensaje_archivo && <Alerta />}
           <div className="flex justify-center mt-5">
             <div className="w-full max-w-lg">
               <form
@@ -77,7 +101,7 @@ const Enlace = ({ enlace }) => {
           </h1>
           <div className="flex items-center justify-center mt-10">
             <a
-              href={`${process.env.backendURL}/api/archivos/${enlace.archivo}`}
+              href={`${process.env.backendURL}/api/archivos/${fileLink}`}
               className="bg-blue-600 px-10 py-3 rounded-lg text-white font-bold uppercase mr-3 cursor-pointer"
               download
             >
