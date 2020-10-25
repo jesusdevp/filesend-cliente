@@ -3,6 +3,7 @@ import clienteAxios from "../../config/axios";
 import React, { useState, useContext } from "react";
 import appContext from "../../context/app/appContext";
 import Alerta from "../../components/Alerta";
+import { useRouter } from "next/router";
 
 export async function getServerSideProps({ params }) {
   const { enlace } = params;
@@ -27,6 +28,7 @@ export async function getServerSidePaths() {
 }
 
 const Enlace = ({ enlace }) => {
+  const router = useRouter();
   // context de la app
   const AppContext = useContext(appContext);
   const { mostrarAlerta, mensaje_archivo } = AppContext;
@@ -55,6 +57,13 @@ const Enlace = ({ enlace }) => {
       mostrarAlerta(error.response.data.msg);
     }
   };
+
+  const redireccionar = () => {
+    setTimeout(() => {
+      router.push("/");
+    }, 2000);
+  };
+
   return (
     <Layout>
       {tienePassword ? (
@@ -104,6 +113,7 @@ const Enlace = ({ enlace }) => {
               href={`${process.env.backendURL}/api/archivos/${fileLink}`}
               className="bg-blue-600 px-10 py-3 rounded-lg text-white font-bold uppercase mr-3 cursor-pointer"
               download
+              onClick={() => redireccionar()}
             >
               Aquí
             </a>

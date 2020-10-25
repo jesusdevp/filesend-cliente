@@ -27,6 +27,11 @@ const Index = () => {
       <div className="md:w-4/5 xl:w-3/5 mx-auto mb-32">
         {url ? (
           <>
+            <h1 className="text-center text-2xl mt-10">
+              <span className="font-bold text-blue-700 text-3xl uppercase">
+                Comparte este URL con quien quieras{" "}
+              </span>
+            </h1>
             <p className="text-center text-2xl mt-10">
               <span className="font-bold text-blue-700 text-3xl uppercase">
                 Tu url es:{" "}

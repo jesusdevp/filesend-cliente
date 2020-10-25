@@ -1,6 +1,6 @@
 module.exports = {
   env: {
-    backendURL: "http://localhost:4000",
-    frontendURL: "http://localhost:3000",
+    backendURL: "https://infinite-bastion-04721.herokuapp.com",
+    frontendURL: "https://filsend-cliente.vercel.app",
   },
 };

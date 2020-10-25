@@ -41,7 +41,7 @@ const AppState = ({ children }) => {
       dispatch({
         type: LIMPIAR_ALERTA,
       });
-    }, 3000);
+    }, 4000);
   };
 
   // Sube los archivos al servidor
